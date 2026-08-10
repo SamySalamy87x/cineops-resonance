@@ -97,17 +97,13 @@ Never commit `.env` files or secrets. The repository ignores all `.env*` files.
 
 ## Deploy the agent to Google Cloud Run
 
-Create the three secrets in Google Secret Manager, then deploy from the repository root:
+Create a new Gemini auth key in Google AI Studio and a Parallel API key. Then open Google Cloud Shell, clone this repository and run the protected deployment helper from the repository root:
 
 ```bash
-gcloud run deploy cineops-agent-service \
-  --source agent-service \
-  --region us-central1 \
-  --allow-unauthenticated \
-  --set-secrets GEMINI_API_KEY=GEMINI_API_KEY:latest,PARALLEL_API_KEY=PARALLEL_API_KEY:latest,CINEOPS_SHARED_SECRET=CINEOPS_SHARED_SECRET:latest
+bash scripts/deploy-cloud-run.sh YOUR_GOOGLE_CLOUD_PROJECT_ID
 ```
 
-Set the returned Cloud Run URL as `CINEOPS_AGENT_URL` in the web runtime, set the matching `CINEOPS_AGENT_TOKEN`, and redeploy the web experience.
+The helper enables the required services, stores all credentials in Secret Manager, deploys with a one-instance cost ceiling, verifies `/health`, and writes the two private Sites values to a restricted temporary file. Set those values as `CINEOPS_AGENT_URL` and `CINEOPS_AGENT_TOKEN` in the web runtime, then redeploy the web experience.
 
 ## API contract
 

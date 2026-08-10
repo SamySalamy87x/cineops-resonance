@@ -291,18 +291,34 @@ async function runCineopsPipeline(input: z.infer<typeof requestSchema>) {
 const app = express();
 app.disable("x-powered-by");
 app.use(express.json({ limit: "32kb" }));
+app.use((_request, response, next) => {
+  response.setHeader("Cache-Control", "no-store");
+  next();
+});
 
 app.get("/health", (_request, response) => {
   response.json({
     ok: true,
     service: "cineops-agent-service",
-    configured: Boolean(process.env.GEMINI_API_KEY && process.env.PARALLEL_API_KEY),
+    configured: Boolean(
+      process.env.GEMINI_API_KEY &&
+      process.env.PARALLEL_API_KEY &&
+      process.env.CINEOPS_SHARED_SECRET,
+    ),
   });
 });
 
 app.post("/pipeline", async (request, response) => {
   const expectedToken = process.env.CINEOPS_SHARED_SECRET;
-  if (expectedToken && request.header("authorization") !== `Bearer ${expectedToken}`) {
+  if (!expectedToken) {
+    response.status(503).json({
+      ok: false,
+      error: "Agent service is not fully configured.",
+    });
+    return;
+  }
+
+  if (request.header("authorization") !== `Bearer ${expectedToken}`) {
     response.status(401).json({ ok: false, error: "Unauthorized agent request." });
     return;
   }

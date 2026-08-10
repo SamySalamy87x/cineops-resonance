@@ -23,10 +23,10 @@ Last verified: August 10, 2026.
 
 ## Release sequence
 
-1. Create or select the Google Cloud project for the hackathon.
-2. Enable Cloud Run, Cloud Build, Artifact Registry and Secret Manager.
-3. Add `GEMINI_API_KEY`, `PARALLEL_API_KEY` and a random `CINEOPS_SHARED_SECRET` to Secret Manager.
-4. Deploy `agent-service/` to Cloud Run.
+1. Request the official $100 Google Cloud hackathon credit and create or select the Cloud project.
+2. Create a current Gemini auth key and a Parallel API key.
+3. Run `scripts/deploy-cloud-run.sh` from Google Cloud Shell; it enables services and stores the three secrets.
+4. Deploy `agent-service/` to Cloud Run through the helper.
 5. Verify `GET /health` reports `configured: true`.
 6. Add the Cloud Run URL and matching token to the web runtime as `CINEOPS_AGENT_URL` and `CINEOPS_AGENT_TOKEN`.
 7. Run the TRANSFORMADORES brief and verify the UI reports a live dossier.
