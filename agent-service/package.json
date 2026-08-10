@@ -1,0 +1,28 @@
+{
+  "name": "cineops-agent-service",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24.13.0"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/server.js",
+    "dev": "tsx watch src/server.ts",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@google/adk": "1.4.0",
+    "@google/genai": "2.16.0",
+    "express": "5.1.0",
+    "parallel-web": "1.1.0",
+    "zod": "4.4.3"
+  },
+  "devDependencies": {
+    "@types/express": "5.0.3",
+    "@types/node": "24.3.0",
+    "tsx": "4.20.5",
+    "typescript": "5.9.3"
+  }
+}
