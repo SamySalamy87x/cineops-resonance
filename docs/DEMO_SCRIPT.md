@@ -1,47 +1,53 @@
-# Three-minute demo script
+# CINEOPS // RESONANCE — three-minute demo script
 
-Target length: 2:40–2:55. Spoken language: English.
+Target runtime: **2:40–2:55**. Spoken language: **English**.
 
-## 0:00–0:20 — The problem
+Important: record a genuine live-mode pipeline run, but do not publish real third-party brand names, page titles or URLs returned by Parallel Search. Keep the source-detail view out of frame or redact those details in editing. The live app can still use real Parallel Search at runtime.
 
-> Film development starts with a strong idea, then fragments across research tabs, moodboards, treatments and feasibility notes. CINEOPS Resonance turns that creative chaos into one grounded production signal.
+## 0:00–0:18 — Problem
 
-Show the hero, system topology and six-stage runtime.
+> Film development starts with one strong idea, then fragments across research tabs, moodboards, treatments and feasibility notes. CINEOPS Resonance turns that creative chaos into one traceable production signal.
 
-## 0:20–0:45 — The brief
+Show the hero and the system topology: Gemini, Parallel and ADK.
 
-> I will use TRANSFORMADORES: a four-minute music film about people who stop inheriting fear and begin transforming the systems around them. I can also constrain format, duration and production scale.
+## 0:18–0:42 — Director brief
+
+> I will use TRANSFORMADORES: a four-minute music film about people who stop inheriting fear and begin transforming the systems around them. I can constrain format, duration and production scale before the agents begin.
 
 Show the brief and the three production controls.
 
-## 0:45–1:20 — Live intelligence
+## 0:42–1:15 — Live intelligence
 
-> When I run the pipeline, the server first calls Parallel Search at runtime. It collects current evidence, excerpts and URLs into one source ledger. That evidence becomes shared state for the Google ADK workflow.
+> When I run the pipeline, CINEOPS first calls Parallel Search at runtime. Current web evidence is converted into a shared evidence ledger, then passed into the Google ADK workflow. This is a live partner integration, not a static lookup or README-only reference.
 
-Run the experience. Pause on `Live Intelligence`, then open the Sources tab after completion.
+Press **RUN PRODUCTION INTELLIGENCE**. Keep the pipeline visible. Let `Live Intelligence` complete, but do not expose real third-party source names or URLs in the published recording.
 
-## 1:20–1:55 — Multi-agent orchestration
+## 1:15–1:52 — Multi-agent orchestration
 
-> Gemini's Brief Director defines the creative contract. Then Narrative, Production and Sonic plus Visual specialists run concurrently through ADK's ParallelAgent. A final Greenlight agent reconciles their work after every specialist completes.
+> Gemini's Brief Director defines the creative contract. Then Narrative, Production, and Sonic plus Visual specialists run concurrently through ADK's ParallelAgent. A final Greenlight agent synthesizes their work only after every specialist completes.
 
-Show the six completed stages and the system topology.
+Show all six stages reaching complete status and the total runtime.
 
-## 1:55–2:25 — The output
+## 1:52–2:27 — Production dossier
 
-> The result is not another chat transcript. It is a usable dossier: a core thesis, a visual progression, a measurable BPM arc, a feasibility score and a deliverables plan. Each recommendation keeps its evidence references.
+> The result is not another chat transcript. It is a production-ready dossier: a core thesis, a visual arc, a measurable BPM progression, a feasibility score and a concrete deliverables plan. The recommendations remain grounded in the evidence gathered during the same live run.
 
-Move through Dossier, Sources and Deliverables.
+Move through the Dossier and Deliverables views. Do not publish real source-detail metadata.
 
-## 2:25–2:50 — Why it matters
+## 2:27–2:50 — Impact
 
-> CINEOPS helps independent teams make better creative decisions before expensive production begins. It preserves the filmmaker's intent while making research traceable, scope visible and the next action concrete.
+> CINEOPS helps filmmakers make better decisions before expensive production begins. It preserves authorship while making research traceable, scope visible and the next production action concrete. Gemini provides the specialist intelligence, Google ADK controls the workflow, and Parallel keeps the system grounded in current evidence.
 
-End on the complete dossier and live source ledger.
+End on the completed live dossier with the `PARALLEL TRACK` chip and six completed stages visible.
 
-## Recording checks
+## Recording checklist
 
-- Keep the complete video below 3:00.
-- Record a genuine live-mode run; do not record the labeled demo fallback.
-- Keep browser zoom and text readable at 1080p.
-- Do not show environment variables, keys, terminal history or cloud console secrets.
-- Add accurate English subtitles if narration is not in English.
+- Video must remain below 3:00.
+- Record a genuine `mode: live` run.
+- Use 1080p or higher with readable browser text.
+- Do not show API keys, coupon codes, bearer tokens, Cloud Console secrets, environment variables or terminal history.
+- Do not show real third-party names, page titles or URLs from Parallel in the published video/screenshots.
+- Keep narration in English; otherwise add accurate English subtitles.
+- Show the hosted interface, not a slide deck pretending to be the product.
+- Show the button press, live pipeline progression, completed stages and generated dossier.
+- Capture a second live run separately for private QA; it does not need to be in the final video.
