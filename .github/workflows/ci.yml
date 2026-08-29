@@ -1,0 +1,49 @@
+name: CINEOPS CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node 24
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            agent-service/package-lock.json
+
+      - name: Install web dependencies
+        run: npm ci
+
+      - name: Install agent-service dependencies
+        run: npm --prefix agent-service ci
+
+      - name: Lint web experience
+        run: npm run lint
+
+      - name: Build web experience
+        run: npm run build
+
+      - name: Test rendered web artifact
+        run: node --test tests/rendered-html.test.mjs
+
+      - name: Typecheck agent service
+        run: npm --prefix agent-service run typecheck
+
+      - name: Build agent service
+        run: npm --prefix agent-service run build
