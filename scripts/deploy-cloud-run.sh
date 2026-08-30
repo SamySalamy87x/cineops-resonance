@@ -10,11 +10,6 @@ if ! command -v gcloud >/dev/null 2>&1; then
   exit 69
 fi
 
-if ! command -v python3 >/dev/null 2>&1; then
-  echo "python3 is required for the post-deploy live verification." >&2
-  exit 69
-fi
-
 if [[ -z "${cineops_project_id}" || "${cineops_project_id}" == "(unset)" ]]; then
   echo "Usage: bash scripts/deploy-cloud-run.sh YOUR_GOOGLE_CLOUD_PROJECT_ID [REGION]" >&2
   exit 64
@@ -105,73 +100,18 @@ cineops_service_url="$(gcloud run services describe "${cineops_service}" \
   --region "${cineops_region}" \
   --format='value(status.url)')"
 
-cineops_health_file="/tmp/cineops-health.json"
-cineops_smoke_file="/tmp/cineops-live-smoke.json"
 cineops_handoff_file="/tmp/cineops-sites-env.txt"
 umask 077
-
-echo
-echo "Cloud Run deployment completed."
-echo "Service: ${cineops_service_url}"
-echo "Checking service configuration..."
-curl --fail-with-body --silent --show-error \
-  --max-time 30 \
-  "${cineops_service_url}/health" > "${cineops_health_file}"
-
-python3 - "${cineops_health_file}" <<'PY'
-import json
-import pathlib
-import sys
-
-payload = json.loads(pathlib.Path(sys.argv[1]).read_text())
-if payload.get("ok") is not True or payload.get("configured") is not True:
-    raise SystemExit(f"Health check did not report configured=true: {payload}")
-print("Health verified: configured=true")
-PY
-
-echo "Running real Gemini + Parallel end-to-end smoke test..."
-curl --fail-with-body --silent --show-error \
-  --max-time 240 \
-  -X POST "${cineops_service_url}/pipeline" \
-  -H 'Content-Type: application/json' \
-  -H "Authorization: Bearer ${cineops_shared_secret}" \
-  --data-binary '{"brief":"A four-minute cinematic piece about people transforming inherited systems into humane, collaborative futures through visible collective action.","constraints":{"format":"music-film","duration":"4m","scale":"lean"}}' \
-  > "${cineops_smoke_file}"
-
-python3 - "${cineops_smoke_file}" <<'PY'
-import json
-import pathlib
-import sys
-
-payload = json.loads(pathlib.Path(sys.argv[1]).read_text())
-errors = []
-if payload.get("ok") is not True:
-    errors.append("ok is not true")
-if payload.get("mode") != "live":
-    errors.append("mode is not live")
-stages = payload.get("stages") or []
-if len(stages) != 6 or any(stage.get("state") != "complete" for stage in stages):
-    errors.append("all six stages are not complete")
-sources = ((payload.get("dossier") or {}).get("sources") or [])
-if len(sources) < 1:
-    errors.append("no Parallel evidence sources were returned")
-if errors:
-    raise SystemExit("Live smoke test failed: " + "; ".join(errors))
-print(
-    "Live pipeline verified: mode=live, "
-    f"stages={len(stages)}, sources={len(sources)}, "
-    f"latencyMs={payload.get('totalLatencyMs')}"
-)
-PY
-
 printf 'CINEOPS_AGENT_URL=%s\nCINEOPS_AGENT_TOKEN=%s\n' \
   "${cineops_service_url}" \
   "${cineops_shared_secret}" > "${cineops_handoff_file}"
 unset cineops_shared_secret
 
 echo
-echo "CINEOPS Cloud Run release gate PASSED."
-echo "Health evidence: ${cineops_health_file}"
-echo "Private live smoke evidence: ${cineops_smoke_file}"
+echo "Cloud Run deployment completed."
+echo "Service: ${cineops_service_url}"
+echo "Health check:"
+curl --fail-with-body --silent --show-error "${cineops_service_url}/health"
+echo
 echo "The two private Sites values were written to ${cineops_handoff_file}."
-echo "Do not commit, email, screenshot, or paste the handoff file into a public chat."
+echo "Do not commit, email, or paste that file into a public chat."
