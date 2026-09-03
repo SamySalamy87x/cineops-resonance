@@ -10,14 +10,26 @@ if ! command -v gcloud >/dev/null 2>&1; then
   exit 69
 fi
 
-if [[ -z "${cineops_project_id}" || "${cineops_project_id}" == "(unset)" ]]; then
-  echo "Usage: bash scripts/deploy-cloud-run.sh YOUR_GOOGLE_CLOUD_PROJECT_ID [REGION]" >&2
-  exit 64
-fi
-
 if ! gcloud auth list --filter=status:ACTIVE --format='value(account)' | grep -q .; then
   echo "Sign in to Google Cloud before running this script." >&2
   exit 77
+fi
+
+if [[ -z "${cineops_project_id}" || "${cineops_project_id}" == "(unset)" ]]; then
+  echo "No Google Cloud project is selected. Projects available to this account:"
+  gcloud projects list --format='table(projectId,name,lifecycleState)'
+  echo
+  read -r -p "Google Cloud project ID to use for CINEOPS: " cineops_project_id
+fi
+
+if [[ -z "${cineops_project_id}" ]]; then
+  echo "A Google Cloud project ID is required." >&2
+  exit 64
+fi
+
+if ! gcloud projects describe "${cineops_project_id}" >/dev/null 2>&1; then
+  echo "Project '${cineops_project_id}' is not accessible to the active Google account." >&2
+  exit 66
 fi
 
 read -r -s -p "Google Gemini API key: " cineops_gemini_key
