@@ -76,17 +76,21 @@ Without `CINEOPS_AGENT_URL`, the web experience intentionally returns its labele
 ```bash
 npm --prefix agent-service ci
 npm --prefix agent-service run build
+GOOGLE_API_KEY=... \
 GEMINI_API_KEY=... \
 PARALLEL_API_KEY=... \
 CINEOPS_SHARED_SECRET=... \
 npm --prefix agent-service start
 ```
 
+`@google/adk` for TypeScript reads `GOOGLE_API_KEY` for Gemini API authentication. The deployment helper binds the same Secret Manager value to both `GOOGLE_API_KEY` and the service's backward-compatible `GEMINI_API_KEY` check.
+
 Environment variables:
 
 | Variable | Location | Required | Purpose |
 |---|---|---:|---|
-| `GEMINI_API_KEY` | Agent service | Yes | Gemini model access |
+| `GOOGLE_API_KEY` | Agent service | Yes in deployed ADK runtime | Gemini model access for Google ADK |
+| `GEMINI_API_KEY` | Agent service | Yes for current service readiness guard | Backward-compatible alias bound to the same Gemini secret |
 | `PARALLEL_API_KEY` | Agent service | Yes | Parallel Search runtime access |
 | `GEMINI_MODEL` | Agent service | No | Defaults to `gemini-2.5-flash` |
 | `CINEOPS_SHARED_SECRET` | Agent service | Recommended | Authenticates proxy requests |
@@ -97,13 +101,20 @@ Never commit `.env` files or secrets. The repository ignores all `.env*` files.
 
 ## Deploy the agent to Google Cloud Run
 
-Create a new Gemini auth key in Google AI Studio and a Parallel API key. Then open Google Cloud Shell, clone this repository and run the protected deployment helper from the repository root:
+Create a current Gemini API key in Google AI Studio and a Parallel API key. Then open Google Cloud Shell, clone this repository and run the protected deployment helper from the repository root:
 
 ```bash
-bash scripts/deploy-cloud-run.sh YOUR_GOOGLE_CLOUD_PROJECT_ID
+bash scripts/deploy-cloud-run.sh YOUR_GOOGLE_CLOUD_PROJECT_ID us-central1
 ```
 
-The helper enables the required services, stores all credentials in Secret Manager, deploys with a one-instance cost ceiling, verifies `/health`, and writes the two private Sites values to a restricted temporary file. Set those values as `CINEOPS_AGENT_URL` and `CINEOPS_AGENT_TOKEN` in the web runtime, then redeploy the web experience.
+The helper enables the required Google Cloud services, stores credentials in Secret Manager, deploys the Node service to Cloud Run with a one-instance ceiling, verifies `/health`, and then performs a **real end-to-end smoke run**. Deployment is treated as successful only if the response is `mode: live`, all six stages complete and Parallel returns evidence sources.
+
+On success it writes two private files in Cloud Shell:
+
+- `/tmp/cineops-sites-env.txt` — the two private values needed by the web runtime (`CINEOPS_AGENT_URL` and `CINEOPS_AGENT_TOKEN`)
+- `/tmp/cineops-live-smoke.json` — the verified live pipeline response for private QA
+
+Set the two handoff values in the web runtime and redeploy the public experience. Do not commit or publish either secret value.
 
 ## API contract
 
@@ -129,6 +140,8 @@ npm run lint
 npm --prefix agent-service run typecheck
 npm --prefix agent-service run build
 ```
+
+For the final release, the stronger verification is the deployment helper's authenticated live smoke test, because it exercises Cloud Run, Gemini through ADK and Parallel Search in the same request.
 
 ## Hackathon compliance
 
