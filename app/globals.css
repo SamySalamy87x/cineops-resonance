@@ -79,6 +79,8 @@ button, select { cursor: pointer; }
 .topbar-center { display: flex; align-items: center; gap: 9px; color: var(--muted); font: 10px var(--font-mono); letter-spacing: .11em; }
 .topbar-center strong { color: var(--cyan); font-weight: 500; }
 .signal-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 0 5px rgba(86,243,210,.08), 0 0 16px var(--cyan); }
+.signal-dot.demo { background: var(--amber); box-shadow: 0 0 0 5px rgba(255,216,132,.08), 0 0 16px rgba(255,216,132,.65); }
+.signal-dot.error { background: #ff8c84; box-shadow: 0 0 0 5px rgba(255,140,132,.08), 0 0 16px rgba(255,140,132,.55); }
 .topbar-actions { justify-self: end; display: flex; align-items: center; gap: 10px; }
 .track-chip, .mode-pill { display: inline-flex; align-items: center; gap: 7px; border: 1px solid var(--line); background: rgba(255,255,255,.025); padding: 8px 11px; color: #b7c8cd; font: 9px var(--font-mono); letter-spacing: .11em; }
 .icon-button { width: 34px; height: 34px; display: grid; place-items: center; border: 1px solid var(--line); background: transparent; color: var(--muted); transition: .2s ease; }
@@ -170,6 +172,12 @@ button, select { cursor: pointer; }
 .output-panel { margin-top: 18px; }
 .output-header { align-items: center; padding: 25px 28px; border-bottom: 1px solid var(--line); }
 .output-header h2 { font-size: 24px; letter-spacing: .05em; }
+.output-title { display: flex; align-items: center; flex-wrap: wrap; gap: 7px 12px; }
+.output-title .section-index { flex-basis: 100%; }
+.output-title h2 { margin: 0; }
+.evidence-badge { border: 1px solid var(--line-strong); color: var(--muted); padding: 6px 8px; font: 8px var(--font-mono); letter-spacing: .1em; }
+.evidence-badge.live { border-color: rgba(86,243,210,.38); background: var(--cyan-soft); color: var(--cyan); }
+.evidence-badge.demo { border-color: rgba(255,216,132,.35); background: rgba(255,216,132,.07); color: var(--amber); }
 .tabs { display: flex; gap: 4px; }
 .tabs button { border: 0; background: transparent; color: #6e8992; padding: 10px 14px; text-transform: uppercase; font: 9px var(--font-mono); letter-spacing: .09em; }
 .tabs button.active { color: var(--cyan); background: var(--cyan-soft); }

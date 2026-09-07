@@ -16,9 +16,6 @@ export const metadata: Metadata = {
   title: "CINEOPS // RESONANCE",
   description:
     "Autonomous creative and production intelligence for film, powered by Gemini, Google ADK and Parallel Search.",
-  other: {
-    "codex-preview": "development",
-  },
   icons: {
     icon: "/favicon.svg",
     shortcut: "/favicon.svg",

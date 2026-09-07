@@ -113,7 +113,9 @@ export default function Home() {
         return {
           ...stage,
           state: "complete" as const,
-          latency: runtimeStage?.latencyMs
+          latency: pipelineResult.mode === "demo"
+            ? "PREVIEW"
+            : runtimeStage?.latencyMs
             ? `${(runtimeStage.latencyMs / 1000).toFixed(1)}s`
             : "DONE",
         };
@@ -201,9 +203,19 @@ export default function Home() {
           </span>
         </a>
         <div className="topbar-center" aria-label="Runtime status">
-          <span className="signal-dot" />
+          <span className={`signal-dot ${mode === "demo" ? "demo" : error ? "error" : ""}`} />
           <span>AGENT NETWORK</span>
-          <strong>{complete ? "SYNTHESIZED" : running ? "PROCESSING" : "READY"}</strong>
+          <strong>
+            {error
+              ? "ATTENTION"
+              : running
+                ? "PROCESSING"
+                : mode === "live"
+                  ? "LIVE VERIFIED"
+                  : mode === "demo"
+                    ? "DEMO PREVIEW"
+                    : "READY"}
+          </strong>
         </div>
         <div className="topbar-actions">
           <span className="track-chip"><Radio size={13} /> PARALLEL TRACK</span>
@@ -245,7 +257,7 @@ export default function Home() {
           </div>
           <div className="system-foot">
             <span><ShieldCheck size={14} /> Google-only AI stack</span>
-            <span>v0.1 / BUILD 0826</span>
+            <span>RELEASE CANDIDATE / BUILD 0907</span>
           </div>
         </aside>
       </section>
@@ -331,7 +343,7 @@ export default function Home() {
                 : mode === "live"
                   ? `Live dossier grounded by Parallel${pipelineResult?.model ? ` · ${pipelineResult.model}` : ""}.`
                   : mode === "demo"
-                    ? `Transparent demo mode · connect ${pipelineResult?.missingConfiguration?.join(" + ")}.`
+                    ? "Transparent demo preview · the live Google Cloud runtime is not connected yet."
                     : "Ready to run. Credentials are checked only on the server."}
           </p>
         </article>
@@ -360,18 +372,29 @@ export default function Home() {
           <div className="pipeline-footer">
             <span>
               <span className="mini-bar"><i style={{ width: complete ? "100%" : running ? `${Math.max(8, ((activeStage + 1) / 6) * 100)}%` : "0%" }} /></span>
-              {complete ? "6/6" : running ? `${activeStage + 1}/6` : "0/6"} agents
+              {complete ? "6/6" : running ? `${activeStage + 1}/6` : "0/6"} {mode === "demo" ? "preview stages" : "agents"}
             </span>
-            <span>{complete && pipelineResult ? `${(pipelineResult.totalLatencyMs / 1000).toFixed(1)}s TOTAL` : running ? "LIVE TRACE" : "STANDBY"}</span>
+            <span>
+              {complete && pipelineResult
+                ? pipelineResult.mode === "demo"
+                  ? "SAMPLE DOSSIER"
+                  : `${(pipelineResult.totalLatencyMs / 1000).toFixed(1)}s TOTAL`
+                : running
+                  ? "LIVE TRACE"
+                  : "STANDBY"}
+            </span>
           </div>
         </article>
       </section>
 
       <section className="output-panel panel">
         <div className="output-header">
-          <div>
+          <div className="output-title">
             <span className="section-index">03 / GREENLIGHT DOSSIER</span>
             <h2>{dossier.projectTitle}</h2>
+            <span className={`evidence-badge ${mode ?? "preview"}`}>
+              {mode === "live" ? "LIVE EVIDENCE" : mode === "demo" ? "DEMO DATA" : "SAMPLE DOSSIER"}
+            </span>
           </div>
           <nav className="tabs" aria-label="Dossier views">
             {(["dossier", "sources", "deliverables"] as const).map((item) => (
