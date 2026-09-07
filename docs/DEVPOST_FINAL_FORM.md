@@ -13,7 +13,7 @@ Use only after the public application has been verified in `mode: live` and the 
 | 27954 | Government employee? | **USER CONFIRM: Yes / No** |
 | 27955 | Country | `Mexico` |
 | 27956 | Canada province | `N/A` |
-| 27958 | New or existing before July 27, 2026? | `New` |
+| 27958 | New or existing before July 27, 2026? | **USER CONFIRM: select `New` only if this submission reuses or extends no pre–July 27 code, assets or implementation; otherwise do not submit under the new-project-only rules.** |
 | 28213 | Partner track | `Parallel` |
 | 28048 | Total team size | **USER CONFIRM: 1–4** |
 | 27959 | Open-source repository | `https://github.com/SamySalamy87x/cineops-resonance` |
@@ -45,3 +45,4 @@ Do not submit until all are true:
 - Six pipeline stages complete.
 - Video is public, <=3 minutes, English or accurately English-subtitled, and shows the actual functioning agent.
 - No credentials or private tokens are visible.
+- The entrant has confirmed that the submitted implementation is not a modification or extension of pre-contest work.

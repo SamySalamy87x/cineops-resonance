@@ -154,14 +154,15 @@ Submit early enough to reopen the entry and verify every URL from a signed-out b
 
 CINEOPS is complete only when all of these are true:
 
-1. Google Cloud credit is redeemed.
-2. Cloud Run is deployed.
-3. `/health` returns `configured: true`.
-4. The public app reports `mode: live`.
-5. Two different briefs have passed end-to-end QA.
-6. Source grounding has been manually checked.
-7. A <=3 minute public demo exists.
-8. Devpost has hosted app, repo, video and Parallel track.
-9. Submission confirmation has been verified.
+1. The entrant confirms that this submission reuses or extends no pre-contest code, assets or implementation.
+2. An eligible Google Cloud account or no-cost trial is active.
+3. Cloud Run is deployed.
+4. `/health` returns `configured: true`.
+5. The public app reports `mode: live`.
+6. Two different briefs have passed end-to-end QA.
+7. Source grounding has been manually checked.
+8. A <=3 minute public demo exists.
+9. Devpost has hosted app, repo, video and Parallel track.
+10. Submission confirmation has been verified.
 
 Anything before that is release-candidate state, not final submission state.

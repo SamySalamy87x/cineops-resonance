@@ -4,7 +4,8 @@ Last rebuilt: September 2, 2026.
 
 ## Current official gates
 
-- [x] Project was created during the contest period.
+- [x] The submitted repository and implementation were created during the contest period.
+- [ ] Originality declaration is confirmed: no pre–July 27 code, assets or implementation were reused or extended in this submission.
 - [x] Mexico is an eligible jurisdiction.
 - [x] Devpost registration is confirmed.
 - [x] Public hosted project URL exists.
@@ -34,6 +35,12 @@ The August 31 deadline applied to the optional request for $100 in Google Cloud 
 2. an existing Google Cloud account.
 
 Therefore the active blocker is not the promotional credit. The active blocker is obtaining working Google Cloud credentials/billing access and deploying the Cloud Run service so the submitted project can demonstrate a real runtime call.
+
+## Originality clarification
+
+The official rules say: “New Projects Only: Projects must be newly created by the entrant during the Contest Period.” They also prohibit submitting a modification or extension of pre-existing work.
+
+The current repository and implementation began during the contest period, but a prior conversation used the CINEOPS // RESONANCE name for an earlier concept. Before submission, the entrant must confirm that no code, assets or implementation from that pre-contest concept were reused or extended here. A shared name or idea alone is not being treated as proof either way; this gate requires a truthful entrant confirmation.
 
 ## Final release sequence
 
@@ -68,7 +75,8 @@ Therefore the active blocker is not the promotional credit. The active blocker i
 16. Insert the hosted-project URL, public repository URL and video URL into Devpost.
 17. Paste the final English copy from `docs/DEVPOST_COPY.md`.
 18. Select the Parallel track.
-19. Submit before the official deadline and verify the Devpost confirmation page.
+19. Confirm the originality declaration above before selecting `New` in the Devpost field.
+20. Submit before the official deadline and verify the Devpost confirmation page.
 
 ## Required final links
 
@@ -100,3 +108,4 @@ Do not submit while any of these remain true:
 - The demo does not show the agent functioning end-to-end.
 - The repository is private or lacks a visible open-source license.
 - The Devpost entry is missing any required URL or the Parallel track selection.
+- The entrant has not confirmed that the submitted implementation reuses no pre-contest code, assets or implementation.

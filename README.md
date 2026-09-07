@@ -145,7 +145,7 @@ For the final release, the stronger verification is the deployment helper's auth
 
 ## Hackathon compliance
 
-CINEOPS is a new project for [Agentic Cinema: The Blockbuster Hackathon](https://agentic-cinema.devpost.com/), targeting the [Parallel track](https://agentic-cinema.devpost.com/details/parallel-resources). The source includes the actual runtime imports and calls for Google ADK, Gemini and Parallel Search—not only README references. See the [submission checklist](docs/SUBMISSION_CHECKLIST.md) for the remaining release gates.
+This submitted implementation and its public repository were created for [Agentic Cinema: The Blockbuster Hackathon](https://agentic-cinema.devpost.com/), targeting the [Parallel track](https://agentic-cinema.devpost.com/details/parallel-resources). The source includes the actual runtime imports and calls for Google ADK, Gemini and Parallel Search—not only README references. See the [submission checklist](docs/SUBMISSION_CHECKLIST.md) for the remaining release and originality gates.
 
 ## License
 
