@@ -22,7 +22,7 @@ Last rebuilt: September 8, 2026.
 - [ ] `GET /health` returns `configured: true`.
 - [ ] Web runtime points to the Cloud Run service and returns `mode: live`.
 - [ ] At least one end-to-end live run is captured as evidence.
-- [ ] Public demo video is no longer than three minutes.
+- [x] Demo video URL is attached to the Devpost project and its reported 2:52 duration is below three minutes.
 - [ ] Demo is in English or has accurate English subtitles.
 - [ ] Published demo/screenshots do not expose sensitive credentials or private data.
 - [ ] Devpost written submission is complete in English.
@@ -85,7 +85,7 @@ The current repository and implementation began during the contest period, while
 
 - Hosted project: <https://cineops-resonance.samysalamy.chatgpt.site>
 - Source repository: <https://github.com/SamySalamy87x/cineops-resonance>
-- Demo video: `PENDING_PUBLIC_VIDEO_URL`
+- Demo video: <https://youtu.be/Mg7WXN9qi54?si=qq4cUgGPljp2aHjN>
 - Contest page: <https://agentic-cinema.devpost.com/>
 - Official rules: <https://agentic-cinema.devpost.com/rules>
 - Parallel resources: <https://agentic-cinema.devpost.com/details/parallel-resources>
