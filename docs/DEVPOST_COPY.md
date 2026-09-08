@@ -39,13 +39,13 @@ The public experience is a responsive TypeScript and React application. Its same
 
 The AI runtime is isolated in a Node.js service for Google Cloud Run. It calls Parallel through the official `parallel-web` SDK and converts the returned evidence into shared state. Gemini specialist agents are orchestrated through Google's Agent Development Kit: `ParallelAgent` runs Narrative, Production and Sonic + Visual specialists concurrently, while `SequentialAgent` guarantees that brief interpretation happens first and Greenlight Synthesis happens only after specialist work is complete.
 
-The final Gemini payload is validated against a Zod schema before the server attaches the original Parallel evidence and returns the dossier. The public UI explicitly distinguishes live mode from its transparent fallback demo state; sample output is never represented as live API work.
+The final Gemini payload is validated against a Zod schema, then every cited evidence ID is checked in code against the source IDs returned by that same Parallel call. Web excerpts are passed across an explicit untrusted-data boundary with prompt-injection instructions before the server attaches the original evidence and returns the dossier. The public UI explicitly distinguishes live mode from its transparent fallback demo state; sample output is never represented as live API work.
 
 ## Challenges we ran into
 
 Google ADK expects a full Node server runtime, while the public experience layer is edge-compatible. Loading the ADK runtime directly into that layer would have mixed incompatible execution environments. We separated responsibilities instead: the public worker handles validation and presentation, while Google Cloud Run hosts the ADK, Gemini and Parallel runtime.
 
-The second challenge was provenance. Generative recommendations can sound authoritative even when their evidence is weak. CINEOPS makes the Parallel evidence ledger shared state for the specialist agents, requires evidence references in generated sections and preserves the original runtime sources for verification.
+The second challenge was provenance. Generative recommendations can sound authoritative even when their evidence is weak. CINEOPS makes the Parallel evidence ledger shared state for the specialist agents, requires evidence references in generated sections, rejects invented source IDs and preserves the original runtime sources for verification.
 
 The third challenge was designing a multi-agent workflow that behaves like a production system rather than a collection of personas. We solved that with explicit state contracts, parallel specialist execution and deterministic final synthesis.
 
@@ -55,7 +55,8 @@ The third challenge was designing a multi-agent workflow that behaves like a pro
 - Gemini-only AI execution for the submitted project.
 - Deterministic orchestration with Google ADK's sequential and parallel agent patterns.
 - A source-grounded dossier rather than an unstructured chat transcript.
-- A public product interface that exposes agent progress and production state clearly.
+- A cinematic, accessible public product interface that exposes agent progress, evidence and production state clearly.
+- A strict untrusted-web-content boundary plus post-generation citation integrity validation.
 - Server-side secret isolation and a Cloud Run deployment path using Secret Manager.
 - A transparent demo fallback that never pretends sample content is live evidence.
 - A public, licensed repository containing the web experience, agent service, deployment helper and judging documentation.
@@ -76,7 +77,7 @@ We also learned that research provenance should be a product primitive. Traceabi
 
 ## Built with
 
-Google Agent Development Kit, Gemini, Google Gen AI SDK, Google Cloud Run, Google Secret Manager, Parallel Search API, `parallel-web`, TypeScript, React, Vinext, Zod and Lucide React.
+Google Agent Development Kit, Gemini, Google Gen AI SDK, Google Cloud Run, Google Secret Manager, Parallel Search API, `parallel-web`, TypeScript, React, Vinext, Zod and Lucide React. ChatGPT Codex assisted the development and verification process but is not present in, imported by or called from the application runtime.
 
 ## Partner track
 
@@ -100,7 +101,8 @@ Before pasting this into Devpost, verify all of the following:
 - Parallel is called at runtime,
 - the video is under three minutes and public,
 - the video is English or accurately subtitled in English,
-- no secrets or real third-party source metadata appear in published video/screenshots,
+- no secrets, private account data or unrelated browsing information appear in published video/screenshots,
+- one evidence reference is visibly mapped to its matching public Parallel source row,
 - repository and hosted-project URLs resolve while signed out,
 - the Parallel track is selected,
 - the submission is completed before September 9, 2026 at 2:00 PM PDT / 3:00 PM Mexico City.

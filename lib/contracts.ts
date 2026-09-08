@@ -53,6 +53,7 @@ export type PipelineResponse = {
   stages: PipelineStageResult[];
   missingConfiguration?: string[];
   error?: string;
+  requestId?: string;
 };
 
 export const demoDossier: CineopsDossier = {

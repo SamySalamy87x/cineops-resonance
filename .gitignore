@@ -46,3 +46,6 @@ next-env.d.ts
 
 # Project-specific Sites deployment metadata
 /.openai/hosting.json
+
+# Local Devpost workflow state
+/.devpost-hackathon-state.json

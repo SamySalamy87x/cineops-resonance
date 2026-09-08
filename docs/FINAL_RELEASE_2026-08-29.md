@@ -1,6 +1,6 @@
 # CINEOPS // RESONANCE — final release runbook
 
-Rebuilt on August 29, 2026.
+Rebuilt on September 8, 2026.
 
 This document is the single operational source of truth for finishing the Agentic Cinema submission. It intentionally contains no credentials, coupon codes, API keys or private runtime tokens.
 
@@ -22,30 +22,25 @@ Already present in the repository:
 - final demo script,
 - final submission checklist.
 
-## Current blocker
+## Current blockers
 
-The remaining infrastructure work requires an authenticated Google Cloud billing/project session. The approved promotional credit must first be redeemed into the intended billing account. That operation is intentionally manual because it changes account billing state.
+An existing Google AI Studio project and masked Gemini key have been identified without exposing the key. Billing is not yet active/linked for the project, the Parallel key is still pending, and the Cloud Run service has not been deployed. Billing and payment actions remain manual because they change the entrant's financial account state.
 
-After redemption, the remaining deploy sequence is already encoded in `scripts/deploy-cloud-run.sh`.
+The expired optional promotional-credit request is not an eligibility blocker. Once billing and the two credentials are available, the deploy sequence is encoded in `scripts/deploy-cloud-run.sh`.
 
 ## Operator sequence
 
 ### 1. Billing gate
 
-Redeem the approved promotional Google Cloud credit in the intended billing account before the promotional redemption deadline.
-
-Do not paste the coupon code into issues, commits, screenshots, videos, chat transcripts or public documents.
+Attach an active billing method/account to the intended existing Google project. Complete any payment or prepayment step directly in Google; do not share financial details in chat, issues, commits, screenshots or videos.
 
 ### 2. Cloud project
 
-Create or select the Google Cloud project that will host CINEOPS. Confirm billing is attached.
+Select the existing Google project that will host CINEOPS. Confirm billing is attached and the project ID is correct before deploying.
 
 ### 3. Runtime credentials
 
-Create:
-
-- a current Gemini API key,
-- a Parallel API key.
+Confirm the existing Gemini API key is valid for the selected project and create a Parallel API key.
 
 Keep both private.
 
@@ -110,9 +105,7 @@ Run a second different brief. The output must materially change. If the dossier 
 
 ### 8. Evidence validation
 
-Privately open at least three source URLs and confirm the retrieved excerpt supports the recommendation that cites it.
-
-Do not publish real third-party source names, titles or URLs in the official video/screenshots. The live hosted app may show them during judging; the published media should avoid exposing them.
+Open at least three source URLs and confirm each retrieved excerpt supports the recommendation that cites it. In the official demo, briefly show one evidence reference and its matching public source row so the runtime provenance is observable. Do not show credentials, private browsing data or account information.
 
 ### 9. Record the official demo
 
@@ -128,7 +121,7 @@ Required:
 - six-stage progress visible,
 - generated dossier visible,
 - no secrets,
-- no real third-party Parallel source metadata in published frames.
+- one concise, readable proof of a dossier reference mapped to its public Parallel source row,
 
 ### 10. Upload video
 
@@ -154,7 +147,7 @@ Submit early enough to reopen the entry and verify every URL from a signed-out b
 
 CINEOPS is complete only when all of these are true:
 
-1. The entrant confirms that this submission reuses or extends no pre-contest code, assets or implementation.
+1. The entrant's confirmation that this submission reuses or extends no pre-contest code, assets or implementation is recorded.
 2. An eligible Google Cloud account or no-cost trial is active.
 3. Cloud Run is deployed.
 4. `/health` returns `configured: true`.

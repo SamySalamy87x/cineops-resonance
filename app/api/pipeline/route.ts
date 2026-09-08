@@ -18,6 +18,7 @@ const requestSchema = z.object({
 
 export async function POST(request: NextRequest) {
   const startedAt = Date.now();
+  const requestId = crypto.randomUUID();
 
   try {
     const body = requestSchema.parse(await request.json());
@@ -50,20 +51,42 @@ export async function POST(request: NextRequest) {
     const response = (await upstream.json()) as PipelineResponse;
 
     if (!upstream.ok || !response.ok) {
-      throw new Error(response.error || `Agent service returned ${upstream.status}.`);
+      console.error("CINEOPS upstream request failed", {
+        requestId,
+        upstreamStatus: upstream.status,
+        upstreamRequestId: response.requestId,
+      });
+      return NextResponse.json(
+        {
+          ok: false,
+          error: response.error || `The live production pipeline could not complete. Reference: ${requestId}`,
+          requestId: response.requestId || requestId,
+          generatedAt: new Date().toISOString(),
+          totalLatencyMs: Date.now() - startedAt,
+        },
+        { status: upstream.status >= 400 && upstream.status < 500 ? upstream.status : 502 },
+      );
     }
 
     return NextResponse.json(response);
   } catch (error) {
-    const message = error instanceof Error ? error.message : "Unknown pipeline error";
+    const isValidationError = error instanceof z.ZodError;
+    console.error("CINEOPS web pipeline request failed", {
+      requestId,
+      errorName: error instanceof Error ? error.name : "UnknownError",
+      message: error instanceof Error ? error.message : "Unknown pipeline error",
+    });
     return NextResponse.json(
       {
         ok: false,
-        error: message,
+        error: isValidationError
+          ? "The production brief or constraints are invalid."
+          : `The production pipeline could not complete. Reference: ${requestId}`,
+        requestId,
         generatedAt: new Date().toISOString(),
         totalLatencyMs: Date.now() - startedAt,
       },
-      { status: 500 },
+      { status: isValidationError ? 400 : 500 },
     );
   }
 }

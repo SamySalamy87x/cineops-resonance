@@ -26,7 +26,7 @@ flowchart TD
     H --> B
 ```
 
-The AI runtime is isolated in Google Cloud Run because Google ADK is a Node server framework. The public web worker only validates input, proxies the request and renders the resulting dossier. API keys remain server-side.
+The AI runtime is isolated in Google Cloud Run because Google ADK is a Node server framework. The public web worker only validates input, proxies the request and renders the resulting dossier. API keys remain server-side. Parallel excerpts cross an explicit untrusted-data boundary, and generated evidence IDs are rejected unless they exist in the same runtime source ledger.
 
 ## Agent workflow
 
@@ -49,7 +49,7 @@ The Narrative, Production and Sonic + Visual agents execute concurrently through
 - TypeScript, React, Vinext and a Cloudflare-compatible Sites worker for the experience layer
 - Google Cloud Run for the agent service
 
-No other AI provider is used.
+No other AI provider is imported or called by the submitted application runtime.
 
 ## Repository layout
 

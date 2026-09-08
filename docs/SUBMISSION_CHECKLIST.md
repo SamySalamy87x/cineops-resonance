@@ -1,11 +1,11 @@
 # Agentic Cinema final submission checklist
 
-Last rebuilt: September 2, 2026.
+Last rebuilt: September 8, 2026.
 
 ## Current official gates
 
 - [x] The submitted repository and implementation were created during the contest period.
-- [ ] Originality declaration is confirmed: no pre–July 27 code, assets or implementation were reused or extended in this submission.
+- [x] Originality declaration is confirmed: the entrant stated that no pre–July 27 code, assets or implementation were reused or extended in this submission.
 - [x] Mexico is an eligible jurisdiction.
 - [x] Devpost registration is confirmed.
 - [x] Public hosted project URL exists.
@@ -15,6 +15,9 @@ Last rebuilt: September 2, 2026.
 - [x] Runtime code imports and calls Parallel Search through the official `parallel-web` SDK.
 - [x] Project targets the Parallel partner track.
 - [x] Google Cloud access does **not** depend on the expired promotional-credit request: official rules allow either a no-cost Google Cloud trial or an existing Google Cloud account. The optional $100 promo-credit request deadline was August 31.
+- [x] An existing Google AI Studio project and masked Gemini API key are present in the intended account; no key value was copied into chat, source or documentation.
+- [ ] Billing is linked/active for the intended Google project and supports the required Gemini and Cloud Run work.
+- [ ] A Parallel API key is created and kept private.
 - [ ] Cloud Run agent service is deployed with Gemini, Parallel and shared-secret configuration stored server-side.
 - [ ] `GET /health` returns `configured: true`.
 - [ ] Web runtime points to the Cloud Run service and returns `mode: live`.
@@ -40,13 +43,13 @@ Therefore the active blocker is not the promotional credit. The active blocker i
 
 The official rules say: “New Projects Only: Projects must be newly created by the entrant during the Contest Period.” They also prohibit submitting a modification or extension of pre-existing work.
 
-The current repository and implementation began during the contest period, but a prior conversation used the CINEOPS // RESONANCE name for an earlier concept. Before submission, the entrant must confirm that no code, assets or implementation from that pre-contest concept were reused or extended here. A shared name or idea alone is not being treated as proof either way; this gate requires a truthful entrant confirmation.
+The current repository and implementation began during the contest period, while a prior conversation used the CINEOPS // RESONANCE name for an earlier concept. On September 8, 2026, the entrant explicitly confirmed that no code, assets or implementation from before July 27 were reused or extended. The shared name/idea is not treated as reused implementation.
 
 ## Final release sequence
 
 1. Sign into the intended Google Cloud account (no-cost trial or existing account).
-2. Create or select the Google Cloud project to host CINEOPS.
-3. Create a current Gemini API key and a Parallel API key.
+2. Select the existing Google AI Studio project and attach an active billing account. This financial step must be completed by the entrant in Google.
+3. Reuse the existing masked Gemini key if it is valid for the project, and create a Parallel API key. Never paste either key into chat.
 4. Open Google Cloud Shell and clone this repository.
 5. Run:
 
@@ -68,14 +71,14 @@ The current repository and implementation began during the contest period, but a
 9. Redeploy the web experience.
 10. Run the TRANSFORMADORES brief and confirm the interface reports `mode: live`.
 11. Run a second materially different brief and confirm narrative, production and sonic/visual outputs change.
-12. Verify at least three Parallel source URLs resolve and support the returned recommendations privately during QA.
+12. Verify at least three Parallel source URLs resolve and support the returned recommendations during QA; show the source-ID mapping briefly in the demo as product proof without exposing private data.
 13. Confirm no API key, bearer token, shared secret or billing detail appears in browser output, repository history, screenshots or video.
 14. Record the <=3 minute demo using `docs/DEMO_SCRIPT.md`.
 15. Upload the demo publicly to YouTube or Vimeo.
 16. Insert the hosted-project URL, public repository URL and video URL into Devpost.
 17. Paste the final English copy from `docs/DEVPOST_COPY.md`.
 18. Select the Parallel track.
-19. Confirm the originality declaration above before selecting `New` in the Devpost field.
+19. Recheck the recorded originality declaration, then select `New` in the Devpost field.
 20. Submit before the official deadline and verify the Devpost confirmation page.
 
 ## Required final links
@@ -95,7 +98,7 @@ The current repository and implementation began during the contest period, but a
 - Six completed pipeline stages.
 - A production dossier containing thesis, visual arc, sonic arc, production control and deliverables.
 - A second run proving outputs respond to a changed brief.
-- At least three source URLs validated privately during QA.
+- At least three source URLs validated during QA, with one source-ID-to-recommendation mapping visible in the demo.
 - No secrets visible anywhere in the published evidence.
 
 ## Stage-one rejection guard
@@ -108,4 +111,3 @@ Do not submit while any of these remain true:
 - The demo does not show the agent functioning end-to-end.
 - The repository is private or lacks a visible open-source license.
 - The Devpost entry is missing any required URL or the Parallel track selection.
-- The entrant has not confirmed that the submitted implementation reuses no pre-contest code, assets or implementation.
