@@ -87,7 +87,7 @@ Google Agent Development Kit, Gemini, Google Gen AI SDK, Google Cloud Run, Googl
 
 - Hosted project: <https://cineops-resonance.samysalamy.chatgpt.site>
 - Source repository: <https://github.com/SamySalamy87x/cineops-resonance>
-- Demo video: `PENDING_PUBLIC_VIDEO_URL`
+- Demo video: <https://youtu.be/Mg7WXN9qi54?si=qq4cUgGPljp2aHjN>
 
 ## Suggested tags
 
