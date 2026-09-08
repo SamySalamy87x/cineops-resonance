@@ -105,9 +105,9 @@ The repository is public and includes the MIT license, application source, agent
 
 ## Demo Video
 
-`PENDING_PUBLIC_YOUTUBE_OR_VIMEO_URL`
+<https://youtu.be/Mg7WXN9qi54?si=qq4cUgGPljp2aHjN>
 
-Required format: a functioning-product demo no longer than three minutes, publicly visible, in English or accurately subtitled in English.
+Entrant-reported duration: **2:52**. Before final submission, verify that it is publicly visible while signed out and is in English or accurately subtitled in English.
 
 ## Screenshot Shot List
 
@@ -128,11 +128,12 @@ Final screenshots are pending the live Cloud Run deployment; do not capture the 
 - Ready: Parallel track and first-time Parallel-user answer confirmed.
 - Ready: public hosted experience, public repository and MIT license.
 - Ready: runtime source imports and calls Google ADK, Gemini and Parallel.
+- Ready: required YouTube demo URL is attached to the Devpost project; entrant reports a 2:52 runtime.
 - Pending: activate/link Google billing for the existing project.
 - Pending: create and securely store the Parallel API key.
 - Pending: deploy and verify Cloud Run, then connect the public Site.
-- Pending: record and publish the <=3 minute live demo.
-- Pending: capture the final live screenshots and add the public video URL.
+- Pending: verify the video is publicly visible while signed out and is in English or accurately subtitled in English.
+- Pending: capture the final live screenshots after the live Cloud Run path is verified.
 - Deadline: September 9, 2026 at 2:00 PM PDT / 3:00 PM Mexico City (`2026-09-09T21:00:00Z`).
 
 ## Known Limitations
@@ -164,4 +165,4 @@ Final screenshots are pending the live Cloud Run deployment; do not capture the 
 | 28102 | First time using ClickHouse? | `N/A, I am not submitting to the ClickHouse track.` |
 | 28103 | First time using Replit? | `N/A, I am not submitting to the Replit track.` |
 
-Global required video field: `PENDING_PUBLIC_YOUTUBE_OR_VIMEO_URL`.
+Global required video field: `https://youtu.be/Mg7WXN9qi54?si=qq4cUgGPljp2aHjN`.
