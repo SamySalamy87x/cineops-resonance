@@ -26,6 +26,8 @@ Use only after the public application has been verified in `mode: live` and the 
 | 28102 | First time using ClickHouse tools? | `N/A, I am not submitting to the ClickHouse track.` |
 | 28103 | First time using Replit tools? | `N/A, I am not submitting to the Replit track.` |
 
+Required demo video: <https://youtu.be/Mg7WXN9qi54?si=qq4cUgGPljp2aHjN> (entrant-reported duration: 2:52).
+
 ## 27961 — What Google Cloud products did you use?
 
 Google Cloud Run hosts the CINEOPS agent runtime. Google Cloud Build and Artifact Registry support source-to-container deployment, while Google Secret Manager stores the Gemini, Parallel and service-authentication credentials server-side. The runtime uses Google Agent Development Kit (ADK) to orchestrate Gemini specialist agents with SequentialAgent and ParallelAgent patterns. The submitted live path is verified by a real end-to-end Cloud Run request that must return mode: live with all six stages complete.
