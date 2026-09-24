@@ -1,4 +1,4 @@
-import { access, cp, mkdir, rm } from "node:fs/promises";
+import { access, cp, mkdir, rm, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import type { Plugin } from "vite";
 
@@ -27,13 +27,22 @@ export function sites(): Plugin {
     async closeBundle() {
       const outputDirectory = resolve(root, "dist", ".openai");
       const hostingConfig = resolve(root, ".openai", "hosting.json");
+      const packagedHostingConfig = resolve(outputDirectory, "hosting.json");
       const drizzleSource = resolve(root, "drizzle");
 
       await rm(outputDirectory, { recursive: true, force: true });
       await mkdir(outputDirectory, { recursive: true });
 
       if (await exists(hostingConfig)) {
-        await cp(hostingConfig, resolve(outputDirectory, "hosting.json"));
+        await cp(hostingConfig, packagedHostingConfig);
+      } else {
+        // CI/public builds intentionally do not carry private Sites identity.
+        // Emit the portable no-binding manifest expected by artifact validation.
+        await writeFile(
+          packagedHostingConfig,
+          JSON.stringify({ d1: null, r2: null }, null, 2) + "\n",
+          "utf8",
+        );
       }
       if (await exists(drizzleSource)) {
         await cp(drizzleSource, resolve(outputDirectory, "drizzle"), {
